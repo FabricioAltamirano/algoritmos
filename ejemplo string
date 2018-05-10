@@ -1,0 +1,108 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include <string>//se necesita la clase string*/
+
+using namespace std;
+int longitud(string nombre);
+bool comparar(string palabra,string palabra2);
+int encontrar(string cadena,string k);
+string subcadena(string nombre,int pos,int l);
+bool polindromo(string palabra);
+
+void main(){
+	int pos, cont, opc;
+	int aux;
+	string var1, var2, nombre;
+	do{
+		cout<<"menú: "<<endl;
+		cout<<"1.- longitud"<<endl;
+		cout<<"2.- compara"<<endl;
+		cout<<"3.- encontrar"<<endl;
+		cout<<"4.- subcadena"<<endl;
+		cout<<"5.- polindromo"<<endl;
+		cout<<"0.- salir"<<endl;
+		cout<<"ingrese una opcion:"<<endl;
+		cin>>opc;
+			switch(opc){
+			case 1:cout<<"ingresar la cadena: ";
+				cin.ignore();
+				getline(cin, var1);
+				aux=longitud(var1);
+				cout<<"la cadena "<< var1 <<"es: "<<aux;
+				break;
+			case 2:cin.ignore();
+				cout<<"ingrese la cadena: ";
+				getline(cin,var1);
+				cout<<"ingrese la cadena: ";
+				getline(cin,var2);
+				if (comparar(var1,var2))
+					cout<<"son iguales";
+				else
+					cout<<"son diferentes";
+				break;
+			case 3:cin.ignore();
+				cout<<"ingrese la cadena principal: ";
+				getline(cin,var1);
+				cout<<"ingrese la cadena a buscar: ";
+				getline(cin,var2);
+				pos=encontrar(var1,var2);
+				if (pos==-1)
+					cout<<"no esta la cadena dentro la otra: ";
+				else 
+					cout<<"esta en la posicion: "<<pos;
+				break;
+			case 4: cin.ignore();
+				cout<<"ingresar la cadena principal: ";
+				getline(cin,var1);
+				cout<<"ingresar la posicion a devolver: ";
+				cin>>pos;
+				nombre=subcadena(var1,pos,1);
+				cout<<"la subcadena enla posicion "<<pos<<"es: "<<nombre;
+				break;
+			case 5: cin.ignore();
+				cout<<"ingresar la cadena principal: ";
+				getline(cin,var1);
+				if (polindromo(var1))
+					cout<<"es un polindromo";
+				else 
+					cout<<"no es un polindromo";
+				break;
+			case 0:cout<<"salir";
+				break;
+			default: cout<<"error";
+			}cout<<endl;
+	}while(opc!=0);
+	getch();
+}
+int longitud(string nombre){
+	int aux1;
+	aux1=nombre.length();
+	return aux1;
+}
+bool comparar(string palabra,string palabra2){
+	bool aux;
+	if (palabra.compare(palabra2)==0)
+		aux=true;
+	else 
+		aux=false;
+	return aux;
+}
+int encontrar(string cadena,string k){
+	int aux;
+	aux=cadena.find(k);
+	return aux;
+} 
+string subcadena(string nombre,int pos,int l){
+	string aux;
+	aux=nombre.substr(pos,l);
+	return aux;
+}
+bool polindromo(string palabra){
+	for(int i=0;i<palabra.length()/2;i++)
+	{if(palabra.at(i)!=palabra.at(palabra.length()-1-i))
+	return false;
+	}
+	return true;
+}
+
